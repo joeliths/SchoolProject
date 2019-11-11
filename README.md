@@ -10,6 +10,7 @@ Small project for teaching purposes.
 * MySQL
 
 **End-Points**
+
 *Get
 -Find all entitys
 URL:http://localhost:8080/school/student
