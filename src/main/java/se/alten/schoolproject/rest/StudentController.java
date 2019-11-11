@@ -2,7 +2,7 @@ package se.alten.schoolproject.rest;
 
 import lombok.NoArgsConstructor;
 import se.alten.schoolproject.dao.SchoolAccessLocal;
-import se.alten.schoolproject.model.StudentModel;
+
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -10,6 +10,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+
+import static javax.ws.rs.core.Response.Status.CONFLICT;
 
 @Stateless
 @NoArgsConstructor
@@ -26,7 +28,32 @@ public class StudentController {
             List students = sal.listAllStudents();
             return Response.ok(students).build();
         } catch ( Exception e ) {
-            return Response.status(Response.Status.CONFLICT).build();
+            return Response.status(CONFLICT).build();
+        }
+    }
+
+    @GET
+    @Path("/find/name")
+    @Produces({"application/JSON"})
+    public Response findStudentByName(@QueryParam("forename") String forename) {
+        try {
+            List answer = sal.findStudentByName(forename);
+            return Response.ok(answer).build();
+
+        } catch ( Exception e ) {
+            return Response.status(CONFLICT).build();
+        }
+    }
+
+    @GET
+    @Path("/find/email")
+    @Produces({"application/JSON"})
+    public Response findStudentByEmail(@QueryParam("email") String email) {
+        try {
+            return sal.findStudentByEmail(email);
+
+        } catch ( Exception e ) {
+            return Response.status(422).build();
         }
     }
 
@@ -39,17 +66,8 @@ public class StudentController {
      */
     public Response addStudent(String studentModel) {
         try {
+            return sal.addStudent(studentModel);
 
-            StudentModel answer = sal.addStudent(studentModel);
-
-            switch ( answer.getForename()) {
-                case "empty":
-                    return Response.status(Response.Status.NOT_ACCEPTABLE).entity("{\"Fill in all details please\"}").build();
-                case "duplicate":
-                    return Response.status(Response.Status.EXPECTATION_FAILED).entity("{\"Email already registered!\"}").build();
-                default:
-                    return Response.ok(answer).build();
-            }
         } catch ( Exception e ) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -57,21 +75,28 @@ public class StudentController {
 
     @DELETE
     @Path("{email}")
-    public Response deleteUser( @PathParam("email") String email) {
+    @Produces({"application/JSON"})
+    public Response deleteUser( @QueryParam("email") String email) {
         try {
-            sal.removeStudent(email);
-            return Response.ok().build();
+            if (sal.removeStudent(email)) return Response.ok().build();
+            else return Response.status(422).build();
         } catch ( Exception e ) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
     @PUT
-    public void updateStudent( @QueryParam("forename") String forename, @QueryParam("lastname") String lastname, @QueryParam("email") String email) {
-        sal.updateStudent(forename, lastname, email);
-    }
+    @Produces({"application/JSON"})
+    public Response updateStudent( @QueryParam("forename") String forename, @QueryParam("lastname") String lastname, @QueryParam("email") String email) {
+        try {
+             return sal.updateStudent(forename, lastname, email);
+        } catch (Exception e){
+            return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+        }
 
     @PATCH
+    @Produces({"application/JSON"})
     public void updatePartialAStudent(String studentModel) {
         sal.updateStudentPartial(studentModel);
     }

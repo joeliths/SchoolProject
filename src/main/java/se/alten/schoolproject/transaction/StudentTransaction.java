@@ -24,36 +24,41 @@ public class StudentTransaction implements StudentTransactionAccess{
     }
 
     @Override
-    public Student addStudent(Student studentToAdd) {
+    public Boolean addStudent(Student studentToAdd) {
         try {
             entityManager.persist(studentToAdd);
             entityManager.flush();
-            return studentToAdd;
+            return true;
         } catch ( PersistenceException pe ) {
-            studentToAdd.setForename("duplicate");
-            return studentToAdd;
+            return false;
         }
     }
 
     @Override
-    public void removeStudent(String student) {
-        //JPQL Query
+    public Student findStudentByEmail(String email) {
+            Query query = entityManager.createQuery("SELECT s from Student s WHERE s.email= :email");
+            query.setParameter("email", email);
+            return (Student) query.getSingleResult();
+    }
+
+    @Override
+    public int removeStudent(String student) {
         Query query = entityManager.createQuery("DELETE FROM Student s WHERE s.email = :email");
-
-        //Native Query
-        //Query query = entityManager.createNativeQuery("DELETE FROM student WHERE email = :email", Student.class);
-
-        query.setParameter("email", student)
+        System.out.println(student);
+        return query.setParameter("email", student)
              .executeUpdate();
     }
 
     @Override
-    public void updateStudent(String forename, String lastname, String email) {
+    public int updateStudent(String forename, String lastname, String email) {
         Query updateQuery = entityManager.createNativeQuery("UPDATE student SET forename = :forename, lastname = :lastname WHERE email = :email", Student.class);
-        updateQuery.setParameter("forename", forename)
+        int hits = updateQuery.setParameter("forename", forename)
                    .setParameter("lastname", lastname)
                    .setParameter("email", email)
                    .executeUpdate();
+        entityManager.flush();
+        return hits;
+
     }
 
     @Override
