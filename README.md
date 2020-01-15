@@ -1,49 +1,106 @@
-# Schoolproject
+#End-points
 
-Small project for teaching purposes.
+##STUDENT CONTROLLER
 
-* Wildfly
-* JEE 8 
-* Java 11
-* Git
-* Maven
-* MySQL
-
-**End-Points**
-
-*Get
--Find all entitys
-URL:http://localhost:8080/school/student
-
--Find an entity by email.
-URL:http://localhost:8080/school/student/find/email
--QueryParams: email
-
--Find an entity be name
-URL:http://localhost:8080/school/student/find/name
--QueryParams: forename
-
-*PUT
--Send a new forename and lastname as queryparams together with email, email
-will identify the entity.
--URL: http://localhost:8080/school/student
--QueryParams: forname,lastname, email
-
-*Delete
--Send email as payload to delete a user. 
--URL: http://localhost:8080/school/student
--QueryParams: email
-
-*POST
--Add a new entity
--Header: Content-Type : application/json
-URL: http://localhost:8080/school/student/add
-BODY: 
+###Add new student
+#####Method: POST
+#####url: http://localhost:8080/school/student/add
+#####Body: 
 {
-	"forename": "Lars",
+	"forename": "Katten",
 	"lastname": "Gunnarsson",
-	"email": "joel.p.gunnarsson"
+	"email": "katt@email.com"
 }
+
+
+###Get all students
+#####Method: GET
+#####url:http://localhost:8080/school/student
+
+###Find student by name
+#####Method: GET
+#####url: http://localhost:8080/school/student/find/nam
+#####@QueryParam: forename
+
+###Find student by email
+#####Method: GET
+#####url: http://localhost:8080/school/student/find/email
+#####@QueryParam: email
+
+###Update student by email
+#####Method: PUT
+#####url: http://localhost:8080/school/student
+#####@QueryParam: forename, lastname, email
+
+###Delete student
+#####Method: DELETE
+#####url: http://localhost:8080/school/student/delete/{email}
+#####@QueryParam: email
+
+-----------------------------------------------------------------------------------------------
+##TEACHER CONTROLLER
+
+###Add new teacher
+#####Method: POST
+#####url: http://localhost:8080/school/student
+#####Body: 
+{
+
+	"forename": "Erik",
+	"lastname": "Gunnarsson",
+	"email": "Erik.gunnarsson@email.com"
+}
+
+###Get all teachers
+#####Method: GET
+#####url: http://localhost:8080/school/teacher
+
+###Find teacher by email
+#####Method: GET
+#####url: http://localhost:8080/school/teacher/find
+#####@QueryParam: email
+
+
+
+###Delete teacher
+#####Method: DELETE
+#####url: http://localhost:8080/school/student/delete/{email}
+#####@QueryParam: email
+
+
+-----------------------------------------------------------------------------------------
+##SUbJECT CONTROLLER
+
+###Add new subject
+#####Method: POST
+#####url: http://localhost:8080/school/subject
+#####Body: 
+{
+	"subject": "Java"
+}
+###Add student to subject
+#####Method: POST
+#####url: http://localhost:8080/school/subject/add/student
+#####@QueryParam: student (email), subject (title)
+
+###Add teacher to subject
+#####Method: POST
+#####url: http://localhost:8080/school/subject/add/teacher
+#####@QueryParam: teacher (email), subject (title)
+
+###Get all subjects
+#####Method: GET
+#####url: http://localhost:8080/school/subject
+
+###Find subject by name
+#####Method: GET
+#####url: http://localhost:8080/school/subject/find
+#####@QueryParam: title
+
+###Delete subject
+#####Method: DELETE
+#####url: http://localhost:8080/school/subject
+#####@QueryParam: title
 
 
 ## Wildfly configuration
