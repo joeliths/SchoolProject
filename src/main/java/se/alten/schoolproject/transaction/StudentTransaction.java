@@ -39,7 +39,7 @@ public class StudentTransaction implements StudentTransactionAccess{
             Query query = entityManager.createQuery("SELECT s from Student s WHERE s.email= :email");
             query.setParameter("email", email);
             return (Student) query.getSingleResult();
-    }
+}
 
     @Override
     public int removeStudent(String student) {

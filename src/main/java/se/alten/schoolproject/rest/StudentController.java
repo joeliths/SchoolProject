@@ -25,9 +25,10 @@ public class StudentController {
     @Produces({"application/JSON"})
     public Response showStudents() {
         try {
-            List students = sal.listAllStudents();
-            return Response.ok(students).build();
+            return sal.listAllStudents();
+
         } catch ( Exception e ) {
+            System.out.println("Enter catch ShowStudents Controller");
             return Response.status(CONFLICT).build();
         }
     }
@@ -37,8 +38,7 @@ public class StudentController {
     @Produces({"application/JSON"})
     public Response findStudentByName(@QueryParam("forename") String forename) {
         try {
-            List answer = sal.findStudentByName(forename);
-            return Response.ok(answer).build();
+            return sal.findStudentByName(forename);
 
         } catch ( Exception e ) {
             return Response.status(CONFLICT).build();
@@ -74,12 +74,11 @@ public class StudentController {
     }
 
     @DELETE
-    @Path("{email}")
+    @Path("/delete")
     @Produces({"application/JSON"})
     public Response deleteUser( @QueryParam("email") String email) {
         try {
-            if (sal.removeStudent(email)) return Response.ok().build();
-            else return Response.status(422).build();
+            return sal.removeStudent(email);
         } catch ( Exception e ) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
