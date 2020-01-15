@@ -1,11 +1,11 @@
-#End-points
+# End-points
 
-##STUDENT CONTROLLER
+## STUDENT CONTROLLER
 
-###Add new student
-#####Method: POST
-#####url: http://localhost:8080/school/student/add
-#####Body: 
+### Add new student
+##### Method: POST
+##### url: http://localhost:8080/school/student/add
+##### Body: 
 {
 	"forename": "Katten",
 	"lastname": "Gunnarsson",
@@ -13,37 +13,37 @@
 }
 
 
-###Get all students
-#####Method: GET
-#####url:http://localhost:8080/school/student
+### Get all students
+##### Method: GET
+##### url:http://localhost:8080/school/student
 
-###Find student by name
-#####Method: GET
-#####url: http://localhost:8080/school/student/find/nam
-#####@QueryParam: forename
+### Find student by name
+##### Method: GET
+##### url: http://localhost:8080/school/student/find/nam
+##### @QueryParam: forename
 
-###Find student by email
-#####Method: GET
-#####url: http://localhost:8080/school/student/find/email
-#####@QueryParam: email
+### Find student by email
+##### Method: GET
+##### url: http://localhost:8080/school/student/find/email
+##### @QueryParam: email
 
-###Update student by email
-#####Method: PUT
-#####url: http://localhost:8080/school/student
-#####@QueryParam: forename, lastname, email
+### Update student by email
+##### Method: PUT
+##### url: http://localhost:8080/school/student
+##### @QueryParam: forename, lastname, email
 
-###Delete student
-#####Method: DELETE
-#####url: http://localhost:8080/school/student/delete/{email}
-#####@QueryParam: email
+### Delete student
+##### Method: DELETE
+##### url: http://localhost:8080/school/student/delete/{email}
+##### @QueryParam: email
 
 -----------------------------------------------------------------------------------------------
-##TEACHER CONTROLLER
+## TEACHER CONTROLLER
 
-###Add new teacher
-#####Method: POST
-#####url: http://localhost:8080/school/student
-#####Body: 
+### Add new teacher
+##### Method: POST
+##### url: http://localhost:8080/school/student
+##### Body: 
 {
 
 	"forename": "Erik",
@@ -51,56 +51,56 @@
 	"email": "Erik.gunnarsson@email.com"
 }
 
-###Get all teachers
-#####Method: GET
-#####url: http://localhost:8080/school/teacher
+### Get all teachers
+##### Method: GET
+##### url: http://localhost:8080/school/teacher
 
-###Find teacher by email
-#####Method: GET
-#####url: http://localhost:8080/school/teacher/find
-#####@QueryParam: email
+### Find teacher by email
+##### Method: GET
+##### url: http://localhost:8080/school/teacher/find
+##### @QueryParam: email
 
 
 
-###Delete teacher
-#####Method: DELETE
-#####url: http://localhost:8080/school/student/delete/{email}
-#####@QueryParam: email
+### Delete teacher
+##### Method: DELETE
+##### url: http://localhost:8080/school/student/delete/{email}
+##### @QueryParam: email
 
 
 -----------------------------------------------------------------------------------------
 ##SUbJECT CONTROLLER
 
-###Add new subject
-#####Method: POST
-#####url: http://localhost:8080/school/subject
-#####Body: 
+### Add new subject
+##### Method: POST
+##### url: http://localhost:8080/school/subject
+##### Body: 
 {
 	"subject": "Java"
 }
-###Add student to subject
-#####Method: POST
-#####url: http://localhost:8080/school/subject/add/student
-#####@QueryParam: student (email), subject (title)
+### Add student to subject
+##### Method: POST
+##### url: http://localhost:8080/school/subject/add/student
+##### @QueryParam: student (email), subject (title)
 
-###Add teacher to subject
-#####Method: POST
-#####url: http://localhost:8080/school/subject/add/teacher
-#####@QueryParam: teacher (email), subject (title)
+### Add teacher to subject
+##### Method: POST
+##### url: http://localhost:8080/school/subject/add/teacher
+##### @QueryParam: teacher (email), subject (title)
 
-###Get all subjects
-#####Method: GET
-#####url: http://localhost:8080/school/subject
+### Get all subjects
+##### Method: GET
+##### url: http://localhost:8080/school/subject
 
-###Find subject by name
-#####Method: GET
-#####url: http://localhost:8080/school/subject/find
-#####@QueryParam: title
+### Find subject by name
+##### Method: GET
+##### url: http://localhost:8080/school/subject/find
+##### @QueryParam: title
 
-###Delete subject
-#####Method: DELETE
-#####url: http://localhost:8080/school/subject
-#####@QueryParam: title
+### Delete subject
+##### Method: DELETE
+##### url: http://localhost:8080/school/subject
+##### @QueryParam: title
 
 
 ## Wildfly configuration
