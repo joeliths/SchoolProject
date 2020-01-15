@@ -78,7 +78,6 @@
 {
 	"subject": "Java"
 }
-
 ###Add student to subject
 #####Method: POST
 #####url: http://localhost:8080/school/subject/add/student
